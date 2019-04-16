@@ -1,43 +1,63 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<title>HTML5 Chatroom</title>
-<meta name="keywords" content="html5">
-<meta name="description" content="A simple html5 Chatroom">
-<meta name="author" content="Wang">
-<meta name="viewport" content="width=1024">
-<style type="text/css">
-body{background-color:#fff;color:#444;font-size:14px;line-height:125%;}
-body,input,button,select,textarea{font-family:Verdana,"microsoft yahei",Arial,Helvetica,sans-serif;}
-body,dl,dt,dd,ol,ul,li,h1,h2,h3,h4,h5,h6,p,img{margin:0;padding:0;}
-img{border:0;vertical-align:bottom;}
-:focus{outline:0;}
-</style>
-<link rel="stylesheet" type="text/css" href="css/chatroom.css">
+  <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
+  <!--<script type='text/javascript' src='http://0.0.0.0:8080/scaledrone.js'></script>-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 13px;
+      display: flex;
+      flex-direction: column;
+      max-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .members-count,
+    .members-list,
+    .messages {
+      border: 1px solid #e4e4e4;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    .messages {
+      flex-shrink: 1;
+      overflow: auto;
+    }
+    .message {
+      padding: 5px 0;
+    }
+    .message .member {
+      display: inline-block;
+    }
+    .member {
+      padding-right: 10px;
+      position: relative;
+    }
+    .message-form {
+      display: flex;
+      flex-shrink: 0;
+    }
+    .message-form__input {
+      flex-grow: 1;
+      border: 1px solid #dfdfdf;
+      padding: 10px 15px;
+      font-size: 16px;
+    }
+    .message-form__button {
+      margin: 10px;
+    }
+  </style>
 </head>
 <body>
-<div>
-	<div id="chat-room">
-		<div id="chat-area" id="chat-area"></div>
-		<div class="chat-input">
-			<input type="text" id="chat-text" class="chat-text"><input type="button" value="发送" id="chat-send" class="chat-btn"><input type="button" value="位置" id="chat-place" class="chat-btn"><a class="chat-file-box" title="发送图片" href="javascript:;"><input type="button" value="图片" class="chat-btn"><input type="file" accept="image/*" id="chat-file"></a>
-		</div>
-		<div id="chat-input-mask"></div>
-		<div id="chat-user-list">
-			<div id="chat-sign-in">
-				<input id="chat-sign-in-btn" class="chat-btn" type="button" value="加入聊天">
-				<input id="chat-sign-out-btn" class="chat-btn" type="button" value="退出聊天">
-			</div>
-		</div>
-	</div>
-	<div style="color:#999;padding-top:20px;text-align:center;"><label for="chat-notify" id="chat-notify-label"><input type="checkbox" id="chat-notify">接收桌面通知</label></div>
-</div>
-<div id="chat-mask"></div>
-<div id="chat-sign-box">
-	<div class="chat-sign-con">
-		<div style="line-height:20px;text-indent:14px;">选择一个头像:</div>
-		<div class="chat-avatars">
-			<a href="javascript:;" class="checked">
-				<img src="avatars/maqing.jpg" width="60" height="60">
+  <div class="members-count">-</div>
+  <div class="members-list">-</div>
+  <div class="messages"></div>
+  <form class="message-form" onsubmit="return false;">
+    <input class="message-form__input" placeholder="Type a message.." type="text"/>
+    <input class="message-form__button" value="Send" type="submit"/>
+  </form>
+  <script src="./script.js"></script>
 				<span></span>
 			</a>
 			<a href="javascript:;">
